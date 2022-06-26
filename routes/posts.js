@@ -1,16 +1,16 @@
 const router = require("express").Router();
-const User = require("../models/User");
 const Post = require("../models/Post");
 const Sentiment = require("../Sentiment/index");
 
 //CREATE POST
 router.post("/", async (req, res) => {
-  console.log("creating posts by id ", );
-  console.log("req.body: ", req.body);
+  console.log("creating posts by id ",);
+  console.log("req.body: ", req.body.desc);
   // retirve post data from the request body
-  const newPost = new Post(req.body);
-  console.dir(newPost);
-  
+  var sentiment = new Sentiment();
+  var result = await sentiment.analyze(req.body.desc);
+  const newPost = new Post({...req.body, rating: result.score});
+  console.dir(newPost)
   try {
     // save the post to the database
     const savedPost = await newPost.save();
@@ -24,7 +24,7 @@ router.post("/", async (req, res) => {
 
 //UPDATE POST
 router.put("/:id", async (req, res) => {
-  console.log("updating posts by id ", );
+  console.log("updating posts by id ",);
   try {
     // find the post by id
     const post = await Post.findById(req.params.id);
@@ -55,7 +55,7 @@ router.put("/:id", async (req, res) => {
 
 //DELETE POST
 router.delete("/:id", async (req, res) => {
-  console.log("deleting posts by id ", );
+  console.log("deleting posts by id ",);
   try {
     // find the post by id
     const post = await Post.findById(req.params.id);
@@ -76,7 +76,7 @@ router.delete("/:id", async (req, res) => {
 
 //GET POST
 router.get("/:id", async (req, res) => {
-  console.log("getting posts by id ", );
+  console.log("getting posts by id ",);
   try { // find the post by id
     const post = await Post.findById(req.params.id);
     res.status(200).json(post);
@@ -87,7 +87,7 @@ router.get("/:id", async (req, res) => {
 
 //GET ALL POSTS
 router.get("/", async (req, res) => {
-  console.log("getting posts", );
+  console.log("getting posts",);
   const username = req.query.user;
   const catName = req.query.cat;
   try {   // find all posts

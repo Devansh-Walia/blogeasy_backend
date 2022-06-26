@@ -23,6 +23,10 @@ const PostSchema = new mongoose.Schema(
       type: Array,
       required: false,
     },
+    rating: {
+      type: Number,
+      required : false,
+    }
   },
   { timestamps: true }
 );
