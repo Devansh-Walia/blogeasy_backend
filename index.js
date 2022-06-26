@@ -9,9 +9,14 @@ const devsRoute = require("./routes/devs");
 const categoryRoute = require("./routes/categories");
 const multer = require("multer");
 const path = require("path");
+const cors = require("cors");
 
 dotenv.config();
 app.use(express.json());
+app.use(cors({ 
+  origin: "https://devansh-walia.github.io/mern_blogeasy/", 
+  credentials: true 
+ }));
 app.use("/images", express.static(path.join(__dirname, "/images")));
 
 mongoose
