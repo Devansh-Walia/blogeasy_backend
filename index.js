@@ -14,7 +14,7 @@ const cors = require("cors");
 dotenv.config();
 app.use(express.json());
 
-var whitelist = ['http://localhost:3000/', 'https://devansh-walia.github.io/mern_blogeasy/']
+var whitelist = ['http://localhost:3000', 'https://devansh-walia.github.io/mern_blogeasy']
 var corsOptions = {
   origin: function (origin, callback) {
     if (whitelist.indexOf(origin) !== -1) {
