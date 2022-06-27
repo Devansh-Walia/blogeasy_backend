@@ -14,13 +14,13 @@ const cors = require("cors");
 dotenv.config();
 app.use(express.json());
 
-var whitelist = ['http://localhost:3000', 'https://blog-easy.herokuapp.com/api/', 'http://192.168.29.20:3000', 'https://devansh-walia.github.io/mern_blogeasy/']
+var whitelist = ['http://localhost:3000', 'https://blog-easy.herokuapp.com/api/', 'http://192.168.29.20:3000', 'https://devansh-walia.github.io/mern_blogeasy/', undefined]
 var corsOptions = {
   origin: function (origin, callback) {
     if (whitelist.indexOf(origin) !== -1) {
       callback(null, true)
     } else {
-      console.log(origin);
+      console.log("origin",origin);
       callback(new Error('Not allowed by CORS'))
     }
   }
