@@ -13,19 +13,18 @@ const cors = require("cors");
 
 dotenv.config();
 app.use(express.json());
-app.use(cors({ 
-  origin: "https://devansh-walia.github.io/mern_blogeasy/", 
-  credentials: true ,
-  optionSuccessStatus:200
-}));
 
-const corsOptions ={
-  origin:'http://localhost:3000', 
-  credentials:true,            //access-control-allow-credentials:true
-  optionSuccessStatus:200
+var whitelist = ['http://localhost:3000/', 'https://devansh-walia.github.io/mern_blogeasy/']
+var corsOptions = {
+  origin: function (origin, callback) {
+    if (whitelist.indexOf(origin) !== -1) {
+      callback(null, true)
+    } else {
+      callback(new Error('Not allowed by CORS'))
+    }
+  }
 }
-
-app.use(cors(corsOptions));
+aoo,use(cors(corsOptions))
 app.use("/images", express.static(path.join(__dirname, "/images")));
 
 mongoose
