@@ -14,7 +14,7 @@ const cors = require("cors");
 dotenv.config();
 app.use(express.json());
 
-var whitelist = ['http://localhost:3000', 'https://devansh-walia.github.io/mern_blogeasy']
+var whitelist = ['http://localhost:3000', 'https://devansh-walia.github.io/mern_blogeasy/']
 var corsOptions = {
   origin: function (origin, callback) {
     if (whitelist.indexOf(origin) !== -1) {
@@ -24,7 +24,7 @@ var corsOptions = {
     }
   }
 }
-aoo,use(cors(corsOptions))
+app.use(cors(corsOptions))
 app.use("/images", express.static(path.join(__dirname, "/images")));
 
 mongoose
