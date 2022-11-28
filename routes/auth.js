@@ -35,6 +35,7 @@ router.post("/login", async (req, res) => {
 
     const { password, ...others } = user._doc; // remove the password from the response
     res.status(200).json(others); // return rest of the user
+    return ;
   } catch (err) {
     res.status(500).json(err); // return error
   }
